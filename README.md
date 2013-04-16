@@ -1,6 +1,7 @@
 ## Node Js monsterId
 
 NodeJs implementation of [monsterId](http://www.splitbrain.org/projects/monsterid) PHP library.
+Create unique avatar based on a seed.
 It depends by node-gd, crypto and srand npm packages.
 
 ## Installation
@@ -25,5 +26,4 @@ http.createServer(function(req, res) {
 }).listen('8088');
 ```
 ## Credits
-
 Thanks to [Andreas Gohr](http://www.splitbrain.org/personal) for his job on the original library.
