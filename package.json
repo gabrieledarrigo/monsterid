@@ -1,8 +1,7 @@
 {
 	"name" : "monsterid",
 	"version" : "0.0.1",
-	"private" : "true",
-	"description" : "Node.js version of monsterid library by Andreas Gohr",
+	"description" : "NodeJs version of monsterId library by Andreas Gohr",
 	"main" : "index.js",
 	"author" : {
 		"name" : "Gabriele D'Arrigo",

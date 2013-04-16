@@ -3,7 +3,12 @@
 NodeJs implementation of [monsterId](http://www.splitbrain.org/projects/monsterid) PHP library.
 It depends by node-gd, crypto and srand npm packages.
 
+## Installation
+
+    $ npm install monsterid
+
 ## How to use
+```js
 //Include monsterId and create an http Server.
 var monsterId = require('monsterid');
 var http = require('http');
@@ -18,7 +23,7 @@ http.createServer(function(req, res) {
     res.writeHead(200, {'Content-type':'image/png'});
     res.end(avatar.getAvatar(), 'binary');
 }).listen('8088');
-
+```
 ## Credits
 
 Thanks to [Andreas Gohr](http://www.splitbrain.org/personal) for his job on the original library.
