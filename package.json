@@ -1,6 +1,6 @@
 {
 	"name" : "monsterid",
-	"version" : "0.0.1",
+	"version" : "0.0.2",
 	"description" : "NodeJs version of monsterId library by Andreas Gohr",
 	"main" : "index.js",
 	"author" : {
