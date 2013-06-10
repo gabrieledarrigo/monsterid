@@ -15,7 +15,7 @@
 	 },
 	"dependencies" : {
 		"node-gd" : "0.2.2",
-		"srand" : "1.1.1",
+		"srand" : "1.1.x",
         "crypto": "0.0.3"
 	},
 	"readmeFilename": "README.md"
