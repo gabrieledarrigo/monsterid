@@ -1,0 +1,8 @@
+# Editor and other stuff
+.idea
+.DS_Store
+
+# Node stuff
+npm-debug.log
+node_modules/
+dist/
