@@ -1,22 +1,45 @@
 {
-	"name" : "monsterid",
-	"version" : "0.0.2",
-	"description" : "NodeJs version of monsterId library by Andreas Gohr",
-	"main" : "index.js",
-	"author" : {
-		"name" : "Gabriele D'Arrigo",
-		"email": "darrigo.g@gmail.com",
-		"url"  : "https://github.com/gabrieledarrigo"
-	},
-	"keywords" : ["monsterid","avatar","image"],
-	"repository" : {
-	    "type": "git",
-	    "url": "http://github.com/gabrieledarrigo/monsterid.git"
-	 },
-	"dependencies" : {
-		"node-gd" : "0.2.2",
-		"srand" : "1.1.x",
-        "crypto": "0.0.3"
-	},
-	"readmeFilename": "README.md"
+  "name": "monsterid",
+  "version": "0.1.0",
+  "description": "Node.js version of monsterId library by Andreas Gohr",
+  "main": "./dist/index.js",
+  "author": {
+    "name": "Gabriele D'Arrigo",
+    "email": "darrigo.g@gmail.com",
+    "url": "https://github.com/gabrieledarrigo"
+  },
+  "scripts": {
+    "build": "babel -d dist/ src/",
+    "prepublish": "npm run build",
+    "test": "babel-tape-runner tests/**/*-test.js | node_modules/.bin/tap-spec"
+  },
+  "keywords": [
+    "es6",
+    "es2015",
+    "monsterid",
+    "avatar",
+    "image"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/gabrieledarrigo/monsterid.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/gabrieledarrigo/monsterid/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "crypto": "0.0.3",
+    "node-gd": "0.5.3",
+    "seed-random": "^2.2.0"
+  },
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "babel-tape-runner": "^1.2.0",
+    "sinon": "^1.17.1",
+    "tap-spec": "^4.1.0",
+    "tape": "^4.2.1"
+  }
 }
