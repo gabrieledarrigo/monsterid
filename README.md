@@ -38,7 +38,7 @@ To transpile the src files run this command:
 
 	$ npm run build
 
-To run all unit tests (with [Tape](https://github.com/substack/tape)) run this command:
+To launch unit tests (with [Tape](https://github.com/substack/tape)) run this command:
 
 	$ npm run test
 
