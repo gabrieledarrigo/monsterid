@@ -1,4 +1,6 @@
 language: node_js
+env:
+  - CXX=g++-4.8
 node_js:
   - "4.0.0"
   - "0.12"
@@ -6,8 +8,11 @@ node_js:
   - "0.10"
 sudo: required
 addons:
+  sources:
+    - ubuntu-toolchain-r-test
   apt:
     packages:
+    - g++-4.8
     - libgd2-xpm-dev
 before_script:
   - npm install

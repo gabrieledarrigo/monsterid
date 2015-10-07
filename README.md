@@ -1,10 +1,14 @@
 ## Node.js monsterId
 > Create your unique monstrous avatar
 
+
+[![Build Status](https://travis-ci.org/gabrieledarrigo/monsterid.svg?branch=master)](https://travis-ci.org/gabrieledarrigo/monsterid)
+
 Node.js implementation of [monsterId](http://www.splitbrain.org/projects/monsterid) PHP library.
 Create a unique avatar based on a seed number.
 
 ## Installation
+This library depend on [node-gd](https://github.com/y-a-v-a/node-gd) so You must have [libgd](http://libgd.github.io/) installed in your system.
 
     $ npm install monsterid
 
@@ -34,7 +38,7 @@ To transpile the src files run this command:
 
 	$ npm run build
 
-To run all unit tests (they run on [Tape](https://github.com/substack/tape) run this command:
+To run all unit tests (with [Tape](https://github.com/substack/tape)) run this command:
 
 	$ npm run test
 
