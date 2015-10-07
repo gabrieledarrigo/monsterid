@@ -37,6 +37,7 @@
   },
   "readmeFilename": "README.md",
   "devDependencies": {
+    "babel": "^5.8.23",
     "babel-tape-runner": "^1.2.0",
     "sinon": "^1.17.1",
     "tap-spec": "^4.1.0",
