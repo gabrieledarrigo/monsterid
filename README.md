@@ -17,7 +17,7 @@ This library depend on [node-gd](https://github.com/y-a-v-a/node-gd) so You must
 ```js
 //Include monsterId and create an http Server.
 var http      = require('http');
-var monsterId = require('./dist/index.js');
+var monsterId = require('monsterid');
 
 http.createServer(function(req, res) {
 	// Your username.
