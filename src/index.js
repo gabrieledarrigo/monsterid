@@ -43,7 +43,7 @@ export default {
     getAvatar(username = '') {
         const hash  = crypto.createHash('md5').update(username).digest('hex');
         const rseed = parseInt(hash.substr(0, 6), 16);
-        const getRandomNumber = randomNumber(seed(rseed));
+        const getRandomNumber = randomNumber(seed(rseed)());
 
         // Create the image with gd.
         let image = gd.createTrueColor(size, size);
