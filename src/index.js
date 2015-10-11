@@ -46,7 +46,7 @@ export default {
         const getRandomNumber = randomNumber(seed(rseed)());
 
         // Create the image with gd.
-        let image = gd.createTrueColor(size, size);
+        let image = gd.createTrueColorSync(size, size);
         let color = image.colorAllocate(255, 255, 255);
         image.fill(0, 0, color);
 

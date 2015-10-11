@@ -46,7 +46,7 @@ test('it should create an image object ready to be filled with the various monst
 	let digestFn = sandbox.stub(hashMock, 'digest', () => { return '6761627269656c65207761732068657265'; });
 
 	let imageMock = { fill: () => {}, colorAllocate : () => {} };
-	let createTrueColorFn = sandbox.stub(gd, 'createTrueColor', () => {
+	let createTrueColorFn = sandbox.stub(gd, 'createTrueColorSync', () => {
 		return imageMock;
 	});
 
