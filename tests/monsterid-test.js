@@ -1,4 +1,5 @@
-import test   from 'tape';
+import test   from 'ava';
+import register from 'babel-register';
 import buffer from 'buffer';
 import seed   from 'seed-random';
 import crypto from 'crypto';
@@ -13,7 +14,7 @@ let sandbox,
 	pngPtr,
 	colorAllocateFn;
 
-function before() {
+test.beforeEach(t => {
 	sandbox = sinon.sandbox.create();
 	imageMock = {
 		fill: () => {},
@@ -26,15 +27,14 @@ function before() {
 	fillFn = sandbox.spy(imageMock, 'fill');
 	pngPtr = sandbox.spy(imageMock, 'pngPtr');
 	colorAllocateFn = sandbox.spy(imageMock, 'colorAllocate');
-}
+});
 
-function after() {
+test.afterEach(t => {
 	sandbox.restore();
-}
+});
 
 test('it should create an image object ready to be filled with the various monster\' parts', t => {
 	t.plan(7);
-	before();
 	
 	let username  = 'username';
 	let hashMock  = { update : () => {}, digest: () => {} };
@@ -57,22 +57,18 @@ test('it should create an image object ready to be filled with the various monst
 	// Create the avatar
 	let avatar = monsterId.getAvatar(username);
 
-	t.equal(createHashFn.calledWith('md5'), true, 'Create an md5 hash');
-	t.equal(updateFn.calledWith(username), true, 'Update the hash object');
-	t.equal(digestFn.calledWith('hex'), true, 'Create the hexadecimal hash');
+	t.is(createHashFn.calledWith('md5'), true, 'Create an md5 hash');
+	t.is(updateFn.calledWith(username), true, 'Update the hash object');
+	t.is(digestFn.calledWith('hex'), true, 'Create the hexadecimal hash');
 
-    t.equal(createTrueColorFn.callCount, 1, 'Create a true color image');
-    t.equal(colorAllocateFn.callCount, 1, 'Create the white background');
-    t.equal(fillFn.callCount, 1, 'Fill the avatar\'s background ');
-    t.equal(fillPartsFn.callCount, 1, 'Fill the avatar with monster\'s body parts');
-
-    after();
-    t.end();
+    t.is(createTrueColorFn.callCount, 1, 'Create a true color image');
+    t.is(colorAllocateFn.callCount, 1, 'Create the white background');
+    t.is(fillFn.callCount, 1, 'Fill the avatar\'s background ');
+    t.is(fillPartsFn.callCount, 1, 'Fill the avatar with monster\'s body parts');
 });
 
 test('it should fill the avatar with the various monster\' parts', t => {
 	t.plan(5);
-	before();
 
 	let username = 'username';
 	let size = 120;
@@ -83,13 +79,10 @@ test('it should fill the avatar with the various monster\' parts', t => {
 	let getRandomNumberFn = sandbox.spy(() => {});
 	let avatar = monsterId.fillParts(imageMock, size, getRandomNumberFn, gd);
 
-	t.equal(getRandomNumberFn.callCount, 9, 'Call getRandomNumber to retrieve a random number from a seed');
-	t.equal(createFromPngFn.callCount, 6, 'Create the image from the monster\'s parts');
-	t.equal(copyFn.calledWith(imageMock, 0, 0, 0, 0, size, size), true, 'Copy the new image with the choosen monster\'s part');
+	t.is(getRandomNumberFn.callCount, 9, 'Call getRandomNumber to retrieve a random number from a seed');
+	t.is(createFromPngFn.callCount, 6, 'Create the image from the monster\'s parts');
+	t.is(copyFn.calledWith(imageMock, 0, 0, 0, 0, size, size), true, 'Copy the new image with the choosen monster\'s part');
 
-	t.equal(colorAllocateFn.callCount, 1, 'Create a random color for the choosen part');
-	t.equal(fillFn.callCount, 1, 'Fill the avatar with the random color');
-
-	after();
-	t.end();
+	t.is(colorAllocateFn.callCount, 1, 'Create a random color for the choosen part');
+	t.is(fillFn.callCount, 1, 'Fill the avatar with the random color');
 });
