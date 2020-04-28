@@ -20,6 +20,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: sudo apt-get install libgd-dev -y 
     - run: npm ci
     - run: npm run build
     - run: npm test
