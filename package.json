@@ -39,10 +39,13 @@
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.1.0",
     "eslint-plugin-import": "2.20.2",
-    "husky": "^4.2.5",
+    "husky": "4.2.5",
     "jest": "25.4.0",
-    "lint-staged": "^10.1.7",
-    "sinon": "9.0.2"
+    "jest-expect-message": "1.0.2",
+    "lint-staged": "10.1.7"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["jest-expect-message"]
   },
   "husky": {
     "hooks": {

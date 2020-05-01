@@ -1,9 +1,18 @@
 import gd from 'node-gd';
 import { fromString } from './utils/randomNumber';
 
-const DEFAULT_SIZE = 120;
+const defaultOptions = {
+  size: 120,
+};
 
-async function fillParts(avatar, getRandomNumber) {
+export default async function monsterid(username = '', options = defaultOptions) {
+  const { size } = options;
+  const getRandomNumber = fromString(username);
+  const monster = await gd.createTrueColor(size, size);
+  const color = monster.colorAllocate(255, 255, 255);
+
+  monster.fill(0, 0, color);
+
   const parts = {
     legs: getRandomNumber(1, 5),
     hair: getRandomNumber(1, 5),
@@ -18,10 +27,10 @@ async function fillParts(avatar, getRandomNumber) {
     const path = `${__dirname}/../images/parts/${part}_${parts[part]}.png`;
     // eslint-disable-next-line no-await-in-loop
     const image = await gd.createFromPng(path);
-    image.copy(avatar, 0, 0, 0, 0, DEFAULT_SIZE, DEFAULT_SIZE);
+    image.copy(monster, 0, 0, 0, 0, size, size);
 
     if (part === 'body') {
-      avatar.fill(0, 0, avatar.colorAllocate(
+      monster.fill(0, 0, monster.colorAllocate(
         getRandomNumber(55, 200),
         getRandomNumber(55, 200),
         getRandomNumber(55, 200),
@@ -29,15 +38,5 @@ async function fillParts(avatar, getRandomNumber) {
     }
   }
 
-  return avatar.pngPtr();
-}
-
-export default async function monsterid(username = '') {
-  const getRandomNumber = fromString(username);
-  const image = await gd.createTrueColor(DEFAULT_SIZE, DEFAULT_SIZE);
-  const color = image.colorAllocate(255, 255, 255);
-
-  image.fill(0, 0, color);
-
-  return fillParts(image, getRandomNumber);
+  return monster.pngPtr();
 }

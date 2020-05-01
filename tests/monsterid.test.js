@@ -1,45 +1,56 @@
-import sinon from 'sinon';
 import gd from 'node-gd';
-import assert from 'assert';
 import monsterId from '../src/monsterId';
 
-let copyFn;
-let fillFn;
-let colorAllocateFn;
-let createTrueColorFn;
-let createFromPngFn;
-
 const imageMock = {
-  fill: () => {},
-  colorAllocate: () => {},
-  copy: () => {},
-  pngPtr: () => {},
+  colorAllocate: jest.fn(),
+  copy: jest.fn(),
+  fill: jest.fn(),
+  pngPtr: jest.fn(),
 };
 
 describe('monsterId', () => {
   beforeEach(() => {
-    copyFn = sinon.spy(imageMock, 'copy');
-    fillFn = sinon.spy(imageMock, 'fill');
-    colorAllocateFn = sinon.spy(imageMock, 'colorAllocate');
-    createTrueColorFn = sinon.stub(gd, 'createTrueColor').callsFake(() => Promise.resolve(imageMock));
-    createFromPngFn = sinon.stub(gd, 'createFromPng').callsFake(() => Promise.resolve(imageMock));
+    jest.spyOn(gd, 'createTrueColor').mockResolvedValue(imageMock);
+    jest.spyOn(gd, 'createFromPng').mockResolvedValue(imageMock);
   });
 
   afterEach(() => {
-    sinon.restore();
+    jest.clearAllMocks();
   });
 
-  test('it should create an image object ready to be filled with the various monster\' parts', async () => {
+  it('should create an image object that is filled with the various monster\' parts', async () => {
     const username = 'username';
     await monsterId(username);
 
-    assert.equal(createTrueColorFn.calledOnce, true, 'Create a true color image');
-    assert.equal(colorAllocateFn.firstCall.calledWith(255, 255, 255), 1, 'Create the white background');
-    assert.equal(colorAllocateFn.secondCall.calledWith(sinon.match.number, sinon.match.number, sinon.match.number), 1, 'Fill with random color');
-    assert.equal(fillFn.calledTwice, true, 'Fill the avatar\'s background and the monster part');
+    expect(gd.createTrueColor, 'Create a true color image for the monster')
+      .toHaveBeenCalled();
 
-    assert.equal(createFromPngFn.callCount, 6, 'Create the image from the monster\'s parts');
-    assert.equal(copyFn.calledWith(imageMock, 0, 0, 0, 0, 120, 120), true, 'Copy the new image with the choosen monster\'s part');
-    assert.equal(colorAllocateFn.secondCall.calledWith(sinon.match.number, sinon.match.number, sinon.match.number), true, 'Fill with random color');
+    expect(imageMock.colorAllocate, 'Create the white background')
+      .toHaveBeenNthCalledWith(1, 255, 255, 255);
+
+    expect(imageMock.colorAllocate, 'Allocate a random color for monster parts')
+      .toHaveBeenNthCalledWith(2, expect.any(Number), expect.any(Number), expect.any(Number));
+
+    expect(gd.createFromPng, 'Create the image from the monster\'s parts')
+      .toHaveBeenCalledTimes(6);
+
+    expect(imageMock.copy, 'Copy the new image with the choosen monster\'s part')
+      .toHaveBeenCalledWith(imageMock, 0, 0, 0, 0, 120, 120);
+
+    expect(imageMock.fill, 'Fill the avatar\'s background and the monster parts')
+      .toHaveBeenCalledTimes(2);
+  });
+
+  it('should accept an optional configuration object with a size property', async () => {
+    const username = 'username';
+    const size = 200;
+
+    await monsterId(username, { size });
+
+    expect(gd.createTrueColor, 'Create a true color image for the monster with the specified options size')
+      .toHaveBeenCalledWith(size, size);
+
+    expect(imageMock.copy, 'Copy the new image with the choosen monster\'s part with the specified options size')
+      .toHaveBeenCalledWith(imageMock, 0, 0, 0, 0, size, size);
   });
 });
