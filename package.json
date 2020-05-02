@@ -10,7 +10,6 @@
   },
   "scripts": {
     "build": "babel -d dist/ src/",
-    "prepublish": "npm run build",
     "test": "ava tests/**/*-test.js --serial --tap | node_modules/.bin/tap-spec"
   },
   "keywords": [
