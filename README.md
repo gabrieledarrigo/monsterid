@@ -1,47 +1,65 @@
-## Node.js monsterId
-> Create your unique monstrous avatar
+# Node.js monsterId
+> 👾 Create your unique monstrous avatar
 
 
-[![Build Status](https://travis-ci.org/gabrieledarrigo/monsterid.svg?branch=master)](https://travis-ci.org/gabrieledarrigo/monsterid)
+![Node.js CI](https://github.com/gabrieledarrigo/monsterid/workflows/Node.js%20CI/badge.svg)
 
 Node.js implementation of [monsterId](http://www.splitbrain.org/projects/monsterid) PHP library.
-Create a unique avatar based on a seed number.
+It creates a unique avatar starting from a string, typically a username, used to generate a unique seed number.
 
 ## Installation
-This library depend on [node-gd](https://github.com/y-a-v-a/node-gd) so You must have [libgd](http://libgd.github.io/) installed in your system.
 
-    $ npm install monsterid
+This library depends on [node-gd](https://github.com/y-a-v-a/node-gd) so, in order to use monsterId, you need to have [libgd](https://github.com/libgd) installed on your system.
+You can follow node-gd installastion's instructions here: [node-gd](https://github.com/y-a-v-a/node-gd#installation).  
+
+To install monsterId just 
+
+```
+  $ npm install monsterid
+```
 
 ## How to use
 
+The usage is actually simple; just import the library an call `monsterId` function with a username to have back a binary object which represents
+your unique avatar 👾.
+
 ```js
-//Include monsterId and create an http Server.
-var http      = require('http');
-var monsterId = require('monsterid');
+const http = require('http');
+const monsterId = require('monsterId');
 
-http.createServer(function(req, res) {
-	// Your username.
-	var username  = 'username';
+http.createServer(async (req, res) => {
+  const username = 'username';
+  const avatar = await monsterId(username);
 
-	// Use method getAvatar to retrieve an image in binary format.
-	var avatar    = monsterId.getAvatar(username);
-
-    res.writeHead(200, {'Content-type':'image/png'});
-    res.end(avatar, 'binary');
-}).listen('8088');
+  res.writeHead(200, { 'Content-type': 'image/png' });
+  res.end(avatar, 'binary');
+}).listen('8080');
 ```
 
-## Transpile and test
+`monsterId` function accepts an optional configuration object that can be used to specify the desired size of the avatar:
 
-The library is authored in ES2015 and transpiled with [Babel](https://babeljs.io/).  
+```js
+const monsterId = require('monsterId');
+
+const avatar = monsterId('username', {
+	size: 200,
+});
+```
+
+## Contributing
+
+The library is authored in ES6, transpiled with [Babel](https://babeljs.io/), and exported as CommonJS module.
 To transpile the src files run this command:
 
+```
 	$ npm run build
+```
 
-To launch unit tests (with [Tape](https://github.com/substack/tape)) run this command:
+To launch all unit tests (with [Jest](https://jestjs.io/)) run this command:
 
+```
 	$ npm run test
-
+```
 
 ## Credits
 

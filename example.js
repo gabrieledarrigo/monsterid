@@ -1,5 +1,5 @@
 const http = require('http');
-const monsterId = require('./dist/index');
+const monsterId = require('monsterId');
 
 http.createServer(async (req, res) => {
   const username = 'username';
