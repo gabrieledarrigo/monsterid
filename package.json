@@ -3,7 +3,6 @@
   "version": "0.1.5",
   "description": "Node.js version of monsterId library by Andreas Gohr",
   "main": "./dist/index.js",
-  "type": "module",
   "author": {
     "name": "Gabriele D'Arrigo",
     "email": "darrigo.g@gmail.com",
@@ -45,7 +44,9 @@
     "lint-staged": "10.1.7"
   },
   "jest": {
-    "setupFilesAfterEnv": ["jest-expect-message"]
+    "setupFilesAfterEnv": [
+      "jest-expect-message"
+    ]
   },
   "husky": {
     "hooks": {

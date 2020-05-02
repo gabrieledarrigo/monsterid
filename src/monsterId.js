@@ -5,7 +5,7 @@ const defaultOptions = {
   size: 120,
 };
 
-export default async function monsterid(username = '', options = defaultOptions) {
+export default async function monsterId(username = '', options = defaultOptions) {
   const { size } = options;
   const getRandomNumber = fromString(username);
   const monster = await gd.createTrueColor(size, size);

@@ -12,7 +12,7 @@ It creates a unique avatar starting from a string, typically a username, used to
 This library depends on [node-gd](https://github.com/y-a-v-a/node-gd) so, in order to use monsterId, you need to have [libgd](https://github.com/libgd) installed on your system.
 You can follow node-gd installastion's instructions here: [node-gd](https://github.com/y-a-v-a/node-gd#installation).  
 
-To install monsterId just 
+To install monsterId just type the following command:
 
 ```
   $ npm install monsterid
@@ -20,8 +20,8 @@ To install monsterId just
 
 ## How to use
 
-The usage is actually simple; just import the library an call `monsterId` function with a username to have back a binary object which represents
-your unique avatar 👾.
+The usage is actually simple; 
+Import the library an call `monsterId` function with a username to have back a binary object which represents your unique avatar 👾.
 
 ```js
 const http = require('http');
