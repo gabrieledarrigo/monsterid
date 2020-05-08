@@ -15,7 +15,7 @@ You can follow node-gd installastion's instructions here: [node-gd](https://gith
 To install monsterId just type the following command:
 
 ```
-  $ npm install monsterid
+$ npm install monsterid
 ```
 
 ## How to use
@@ -52,13 +52,13 @@ The library is authored in ES6, transpiled with [Babel](https://babeljs.io/), an
 To transpile the src files run this command:
 
 ```
-	$ npm run build
+$ npm run build
 ```
 
 To launch all unit tests (with [Jest](https://jestjs.io/)) run this command:
 
 ```
-	$ npm run test
+$ npm run test
 ```
 
 ## Credits

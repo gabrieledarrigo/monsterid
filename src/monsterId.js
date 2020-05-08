@@ -27,7 +27,7 @@ export default async function monsterId(username = '', options = defaultOptions)
     const path = `${__dirname}/../images/parts/${part}_${parts[part]}.png`;
     // eslint-disable-next-line no-await-in-loop
     const image = await gd.createFromPng(path);
-    image.copy(monster, 0, 0, 0, 0, size, size);
+    image.copyResized(monster, 0, 0, 0, 0, size, size, 120, 120);
 
     if (part === 'body') {
       monster.fill(0, 0, monster.colorAllocate(

@@ -3,7 +3,7 @@ import monsterId from '../src/monsterId';
 
 const imageMock = {
   colorAllocate: jest.fn(),
-  copy: jest.fn(),
+  copyResized: jest.fn(),
   fill: jest.fn(),
   pngPtr: jest.fn(),
 };
@@ -34,8 +34,8 @@ describe('monsterId', () => {
     expect(gd.createFromPng, 'Create the image from the monster\'s parts')
       .toHaveBeenCalledTimes(6);
 
-    expect(imageMock.copy, 'Copy the new image with the choosen monster\'s part')
-      .toHaveBeenCalledWith(imageMock, 0, 0, 0, 0, 120, 120);
+    expect(imageMock.copyResized, 'Copy the new image with the choosen monster\'s part')
+      .toHaveBeenCalledWith(imageMock, 0, 0, 0, 0, 120, 120, 120, 120);
 
     expect(imageMock.fill, 'Fill the avatar\'s background and the monster parts')
       .toHaveBeenCalledTimes(2);
@@ -50,7 +50,7 @@ describe('monsterId', () => {
     expect(gd.createTrueColor, 'Create a true color image for the monster with the specified options size')
       .toHaveBeenCalledWith(size, size);
 
-    expect(imageMock.copy, 'Copy the new image with the choosen monster\'s part with the specified options size')
-      .toHaveBeenCalledWith(imageMock, 0, 0, 0, 0, size, size);
+    expect(imageMock.copyResized, 'Copy the new image with the choosen monster\'s part with the specified options size')
+      .toHaveBeenCalledWith(imageMock, 0, 0, 0, 0, size, size, 120, 120);
   });
 });
